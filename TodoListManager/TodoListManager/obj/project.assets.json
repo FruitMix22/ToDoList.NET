@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Corey Medland\\Hackerman\\C++\\TodoListManager\\TodoListManager\\TodoListManager.csproj",
+      "projectUniqueName": "C:\\Users\\Corey Medland\\Hackerman\\C++\\ToDoList\\ToDoList.NET\\TodoListManager\\TodoListManager\\TodoListManager.csproj",
       "projectName": "TodoListManager",
-      "projectPath": "C:\\Users\\Corey Medland\\Hackerman\\C++\\TodoListManager\\TodoListManager\\TodoListManager.csproj",
+      "projectPath": "C:\\Users\\Corey Medland\\Hackerman\\C++\\ToDoList\\ToDoList.NET\\TodoListManager\\TodoListManager\\TodoListManager.csproj",
       "packagesPath": "C:\\Users\\Corey Medland\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Corey Medland\\Hackerman\\C++\\TodoListManager\\TodoListManager\\obj\\",
+      "outputPath": "C:\\Users\\Corey Medland\\Hackerman\\C++\\ToDoList\\ToDoList.NET\\TodoListManager\\TodoListManager\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Corey Medland\\AppData\\Roaming\\NuGet\\NuGet.Config",

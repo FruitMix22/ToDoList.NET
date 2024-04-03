@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "BJtTwiBAwHEAOZYEHYKd0SoEkx1y6vWLaxK9HzTCYvQuDcB4lA8V9BeCS2zPCg0B5sDDowWMBKoHgzavWnTC/w==",
+  "dgSpecHash": "RD7P91si118V0Eh2f5NZGiXCZmbqXqUZeES+psoUIfbtoOa6q5vCLn++2xLdTv6dYLbXbg31EvJBRtLRWS89xg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Corey Medland\\Hackerman\\C++\\TodoListManager\\TodoListManager\\TodoListManager.csproj",
+  "projectFilePath": "C:\\Users\\Corey Medland\\Hackerman\\C++\\ToDoList\\ToDoList.NET\\TodoListManager\\TodoListManager\\TodoListManager.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

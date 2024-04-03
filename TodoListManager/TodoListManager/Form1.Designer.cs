@@ -34,26 +34,26 @@
             ToDoList = new CheckedListBox();
             SuspendLayout();
             // 
-            // textBox1
+            // EnterTaskText
             // 
             EnterTaskText.BackColor = SystemColors.Menu;
             EnterTaskText.BorderStyle = BorderStyle.None;
             EnterTaskText.Font = new Font("Cambria", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             EnterTaskText.Location = new Point(12, 12);
-            EnterTaskText.Name = "textBox1";
+            EnterTaskText.Name = "EnterTaskText";
+            EnterTaskText.ReadOnly = true;
             EnterTaskText.Size = new Size(117, 25);
             EnterTaskText.TabIndex = 0;
             EnterTaskText.Text = "Enter a Task:";
             EnterTaskText.TextChanged += textBox1_TextChanged;
             // 
-            // textBox2
+            // InputField
             // 
-          InputField.Location = new Point(12, 43);
-          InputField.Multiline = true;
-          InputField.Name = "textBox2";
-          InputField.Size = new Size(117, 23);
-          InputField.TabIndex = 1;
-          InputField.TextChanged += textBox2_TextChanged_1;
+            InputField.Location = new Point(12, 43);
+            InputField.Name = "InputField";
+            InputField.Size = new Size(117, 23);
+            InputField.TabIndex = 1;
+            InputField.KeyDown += InputField_Entered;
             // 
             // InputButton
             // 
@@ -68,12 +68,14 @@
             // 
             // ToDoList
             // 
+            ToDoList.CheckOnClick = true;
             ToDoList.FormattingEnabled = true;
             ToDoList.Location = new Point(9, 90);
             ToDoList.Name = "ToDoList";
             ToDoList.Size = new Size(311, 220);
             ToDoList.TabIndex = 3;
             ToDoList.SelectedIndexChanged += ToDoList_SelectedIndexChanged;
+ 
             // 
             // Form1
             // 
@@ -85,18 +87,14 @@
             Controls.Add(InputField);
             Controls.Add(EnterTaskText);
             Name = "Form1";
-            Text = "Form1";
+            Text = "To do list";
             ResumeLayout(false);
             PerformLayout();
+            EnterTaskText.SelectionLength = 0;
+            EnterTaskText.SelectionStart = 0;
         }
 
         #endregion
-
-
-        void TextBoxEdit()
-        {
-            EnterTaskText.ReadOnly = true;
-        }
 
         private TextBox EnterTaskText;
         private TextBox InputField;
