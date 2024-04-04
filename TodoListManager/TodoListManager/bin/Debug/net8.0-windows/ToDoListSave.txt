@@ -1,4 +1,5 @@
-add description for task
-change text colour if completed
-change it to look more modern
-different lists
+add descriptions for tasks0
+change colour if its been completed0
+change it to look more modern0
+different lists0
+saving checked or not1

@@ -123,7 +123,7 @@
             deleteLastSelected.TabIndex = 9;
             deleteLastSelected.Text = "Delete";
             deleteLastSelected.UseVisualStyleBackColor = false;
-            deleteLastSelected.Click += deleteLastSelected_Click;
+            deleteLastSelected.Click += DeleteLastSelected_Click;
             // 
             // saveButton
             // 
@@ -133,7 +133,7 @@
             saveButton.TabIndex = 10;
             saveButton.Text = "Save";
             saveButton.UseVisualStyleBackColor = true;
-            saveButton.Click += saveButton_Click;
+            saveButton.Click += SaveButton_Click;
             // 
             // descriptionBox
             // 
