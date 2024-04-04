@@ -1,0 +1,4 @@
+add description for task
+change text colour if completed
+change it to look more modern
+different lists
