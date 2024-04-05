@@ -28,17 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             InputField = new TextBox();
             InputButton = new Button();
             ToDoList = new CheckedListBox();
             tasksAmountText = new Label();
             tasksCompletedText = new Label();
             panel1 = new Panel();
+            SaveFileButton = new PictureBox();
+            saveFileCurrentText = new Label();
+            LoadFile3 = new Button();
+            LoadFile2 = new Button();
+            LoadFile1 = new Button();
             panel2 = new Panel();
             EnterTaskText = new Label();
             deleteLastSelected = new Button();
-            saveButton = new Button();
-            descriptionBox = new TextBox();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)SaveFileButton).BeginInit();
             SuspendLayout();
             // 
             // InputField
@@ -52,6 +58,7 @@
             // InputButton
             // 
             InputButton.BackColor = SystemColors.ActiveCaption;
+            InputButton.Font = new Font("Century Gothic", 9F);
             InputButton.Location = new Point(135, 92);
             InputButton.Name = "InputButton";
             InputButton.Size = new Size(75, 23);
@@ -63,38 +70,101 @@
             // ToDoList
             // 
             ToDoList.CheckOnClick = true;
+            ToDoList.Font = new Font("Century Gothic", 9F);
+            ToDoList.ForeColor = SystemColors.InfoText;
             ToDoList.FormattingEnabled = true;
             ToDoList.Location = new Point(12, 194);
             ToDoList.Name = "ToDoList";
-            ToDoList.Size = new Size(311, 220);
+            ToDoList.Size = new Size(311, 208);
             ToDoList.TabIndex = 3;
             ToDoList.SelectedIndexChanged += ToDoList_SelectedIndexChanged;
             // 
             // tasksAmountText
             // 
             tasksAmountText.AutoSize = true;
+            tasksAmountText.Font = new Font("Century Gothic", 9F);
             tasksAmountText.Location = new Point(12, 138);
             tasksAmountText.Name = "tasksAmountText";
-            tasksAmountText.Size = new Size(97, 15);
+            tasksAmountText.Size = new Size(105, 17);
             tasksAmountText.TabIndex = 4;
             tasksAmountText.Text = "Amount of tasks:";
             // 
             // tasksCompletedText
             // 
             tasksCompletedText.AutoSize = true;
+            tasksCompletedText.Font = new Font("Century Gothic", 9F);
             tasksCompletedText.Location = new Point(12, 163);
             tasksCompletedText.Name = "tasksCompletedText";
-            tasksCompletedText.Size = new Size(160, 15);
+            tasksCompletedText.Size = new Size(178, 17);
             tasksCompletedText.TabIndex = 5;
             tasksCompletedText.Text = "Amount of tasks completed: ";
             // 
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(255, 255, 128);
+            panel1.Controls.Add(SaveFileButton);
+            panel1.Controls.Add(saveFileCurrentText);
+            panel1.Controls.Add(LoadFile3);
+            panel1.Controls.Add(LoadFile2);
+            panel1.Controls.Add(LoadFile1);
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(914, 50);
             panel1.TabIndex = 6;
+            // 
+            // SaveFileButton
+            // 
+            SaveFileButton.Image = (Image)resources.GetObject("SaveFileButton.Image");
+            SaveFileButton.Location = new Point(601, 8);
+            SaveFileButton.Name = "SaveFileButton";
+            SaveFileButton.Size = new Size(30, 31);
+            SaveFileButton.SizeMode = PictureBoxSizeMode.StretchImage;
+            SaveFileButton.TabIndex = 15;
+            SaveFileButton.TabStop = false;
+            SaveFileButton.Click += SaveFileButton_Click;
+            // 
+            // saveFileCurrentText
+            // 
+            saveFileCurrentText.AutoSize = true;
+            saveFileCurrentText.Font = new Font("Century Gothic", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            saveFileCurrentText.Location = new Point(12, 9);
+            saveFileCurrentText.Name = "saveFileCurrentText";
+            saveFileCurrentText.Size = new Size(171, 30);
+            saveFileCurrentText.TabIndex = 14;
+            saveFileCurrentText.Text = "Current file: 1";
+            // 
+            // LoadFile3
+            // 
+            LoadFile3.Font = new Font("Century Gothic", 9F);
+            LoadFile3.Location = new Point(814, 12);
+            LoadFile3.Name = "LoadFile3";
+            LoadFile3.Size = new Size(86, 23);
+            LoadFile3.TabIndex = 13;
+            LoadFile3.Text = "Load File 3";
+            LoadFile3.UseVisualStyleBackColor = true;
+            LoadFile3.Click += LoadFile3_Click;
+            // 
+            // LoadFile2
+            // 
+            LoadFile2.Font = new Font("Century Gothic", 9F);
+            LoadFile2.Location = new Point(724, 12);
+            LoadFile2.Name = "LoadFile2";
+            LoadFile2.Size = new Size(84, 23);
+            LoadFile2.TabIndex = 12;
+            LoadFile2.Text = "Load File 2";
+            LoadFile2.UseVisualStyleBackColor = true;
+            LoadFile2.Click += LoadFile2_Click;
+            // 
+            // LoadFile1
+            // 
+            LoadFile1.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            LoadFile1.Location = new Point(637, 12);
+            LoadFile1.Name = "LoadFile1";
+            LoadFile1.Size = new Size(81, 23);
+            LoadFile1.TabIndex = 11;
+            LoadFile1.Text = "Load File 1";
+            LoadFile1.UseVisualStyleBackColor = true;
+            LoadFile1.Click += LoadFile1_Click;
             // 
             // panel2
             // 
@@ -107,16 +177,17 @@
             // EnterTaskText
             // 
             EnterTaskText.AutoSize = true;
-            EnterTaskText.Font = new Font("Arial Rounded MT Bold", 18F, FontStyle.Underline, GraphicsUnit.Point, 0);
+            EnterTaskText.Font = new Font("Century Gothic", 18F, FontStyle.Underline, GraphicsUnit.Point, 0);
             EnterTaskText.Location = new Point(12, 61);
             EnterTaskText.Name = "EnterTaskText";
-            EnterTaskText.Size = new Size(158, 28);
+            EnterTaskText.Size = new Size(155, 30);
             EnterTaskText.TabIndex = 8;
             EnterTaskText.Text = "Enter a task:";
             // 
             // deleteLastSelected
             // 
             deleteLastSelected.BackColor = SystemColors.MenuHighlight;
+            deleteLastSelected.Font = new Font("Century Gothic", 9F);
             deleteLastSelected.Location = new Point(343, 194);
             deleteLastSelected.Name = "deleteLastSelected";
             deleteLastSelected.Size = new Size(75, 23);
@@ -125,47 +196,28 @@
             deleteLastSelected.UseVisualStyleBackColor = false;
             deleteLastSelected.Click += DeleteLastSelected_Click;
             // 
-            // saveButton
-            // 
-            saveButton.Location = new Point(783, 492);
-            saveButton.Name = "saveButton";
-            saveButton.Size = new Size(75, 23);
-            saveButton.TabIndex = 10;
-            saveButton.Text = "Save";
-            saveButton.UseVisualStyleBackColor = true;
-            saveButton.Click += SaveButton_Click;
-            // 
-            // descriptionBox
-            // 
-            descriptionBox.Location = new Point(607, 194);
-            descriptionBox.Multiline = true;
-            descriptionBox.Name = "descriptionBox";
-            descriptionBox.PlaceholderText = "Description";
-            descriptionBox.Size = new Size(240, 220);
-            descriptionBox.TabIndex = 11;
-            descriptionBox.Visible = false;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(255, 255, 192);
             ClientSize = new Size(912, 527);
-            Controls.Add(descriptionBox);
-            Controls.Add(saveButton);
             Controls.Add(deleteLastSelected);
             Controls.Add(EnterTaskText);
-            Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(tasksCompletedText);
             Controls.Add(tasksAmountText);
             Controls.Add(ToDoList);
             Controls.Add(InputButton);
             Controls.Add(InputField);
+            Controls.Add(panel2);
             Name = "Form1";
             Text = "To do list";
             FormClosing += Form1_FormClosing;
             Load += Form1_Load;
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)SaveFileButton).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -190,9 +242,10 @@
         //Coloured boxes for design
         private Panel panel1;
         private Panel panel2;
-
-        //Save
-        private Button saveButton;
-        private TextBox descriptionBox;
+        private Button LoadFile1;
+        private Button LoadFile3;
+        private Button LoadFile2;
+        private Label saveFileCurrentText;
+        private PictureBox SaveFileButton;
     }
 }

@@ -31,3 +31,4 @@ C:\Users\Corey Medland\Hackerman\C++\ToDoList\ToDoList.NET\TodoListManager\TodoL
 C:\Users\Corey Medland\Hackerman\C++\ToDoList\ToDoList.NET\TodoListManager\TodoListManager\obj\Debug\net8.0-windows\TodoListManager.pdb
 C:\Users\Corey Medland\Hackerman\C++\ToDoList\ToDoList.NET\TodoListManager\TodoListManager\obj\Debug\net8.0-windows\TodoListManager.genruntimeconfig.cache
 C:\Users\Corey Medland\Hackerman\C++\ToDoList\ToDoList.NET\TodoListManager\TodoListManager\obj\Debug\net8.0-windows\ref\TodoListManager.dll
+C:\Users\Corey Medland\Hackerman\C++\ToDoList\ToDoList.NET\TodoListManager\TodoListManager\obj\Debug\net8.0-windows\TodoListManager.Properties.Resources.resources

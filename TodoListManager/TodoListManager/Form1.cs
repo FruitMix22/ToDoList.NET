@@ -1,14 +1,19 @@
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace TodoListManager
 {
     public partial class Form1 : Form
     {
         //Global vars
-
         //last selectecd item in checkbox to delete
-        int lastSelected = -1;
-        int taskIndex = -1;
+        private int lastSelected = -1;
+
+        //Used to measure where computer is in the list
+        private int taskIndex = -1;
+
+        //Current save file number
+        private int saveFile = 1;
 
         public Form1()
         {
@@ -16,34 +21,44 @@ namespace TodoListManager
         }
 
         //Custom Functions
+
+        //General Update function to update text and GUI
         private void UpdateUI()
         {
             CheckForTotalTasks();
             CheckForTasksCompleted();
+            SaveFileCurrentText();
         }
 
+        //Text updater to show what file youre currently in
+        private void SaveFileCurrentText()
+        {
+            saveFileCurrentText.Text = "File open: " + saveFile;
+        }
+
+        //Text updater to check for how many tasks have been entered
         private void CheckForTotalTasks()
         {
             int tasksAmount = ToDoList.Items.Count;
             tasksAmountText.Text = "Amount of tasks: " + tasksAmount;
-
         }
 
+        //Text updater to check for how many tasks have been completed
         private void CheckForTasksCompleted()
         {
             int completedTasks = ToDoList.CheckedItems.Count;
             tasksCompletedText.Text = "Amount of tasks completed: " + completedTasks;
         }
 
+        //Save to a file
         private void SaveToDoListToFile(string fileName)
         {
-            
             using (StreamWriter writer = new StreamWriter(fileName))
             {
                 foreach (object item in ToDoList.Items)
                 {
                     taskIndex++;
-                    if (ToDoList.GetItemChecked(taskIndex) == true)
+                    if (ToDoList.GetItemChecked(taskIndex))
                     {
                         writer.WriteLine(item.ToString() + "1");
                     }
@@ -56,6 +71,7 @@ namespace TodoListManager
             }
         }
 
+        //Load from a file
         private void LoadToDoListFromFile(string fileName)
         {
             if (File.Exists(fileName))
@@ -65,19 +81,16 @@ namespace TodoListManager
                     string line;
                     while ((line = reader.ReadLine()) != null)
                     {
-                        if(line.EndsWith("1"))
+                        if (line.EndsWith("1"))
                         {
                             line = line.Remove(line.Length - 1);
                             ToDoList.Items.Add(line, true);
-                            
                         }
-                        else if (line.EndsWith("0")) 
+                        else if (line.EndsWith("0"))
                         {
                             line = line.Remove(line.Length - 1);
                             ToDoList.Items.Add(line);
                         }
-
-                       
                     }
                 }
             }
@@ -87,7 +100,10 @@ namespace TodoListManager
             }
         }
 
+        //-------------------------------------------------------------\\
+
         //Event functions
+
         //Handle enter key for entering inputs
         private void InputField_Entered(object sender, KeyEventArgs e)
         {
@@ -121,8 +137,6 @@ namespace TodoListManager
             {
                 InputField.Clear();
             }
-
-
         }
 
         //check what was last selected in the to do list
@@ -150,20 +164,85 @@ namespace TodoListManager
         //handle what happens when the form initially loads
         private void Form1_Load(object sender, EventArgs e)
         {
-            LoadToDoListFromFile("ToDoListSave.txt");
+            //make save files if they odnt exist
+            if (!File.Exists("ToDoListSave1.txt"))
+            {
+                SaveToDoListToFile("ToDoListSave1.txt");
+            }
+            if (!File.Exists("ToDoListSave2.txt"))
+            {
+                SaveToDoListToFile("ToDoListSave2.txt");
+            }
+            if (!File.Exists("ToDoListSave3.txt"))
+            {
+                SaveToDoListToFile("ToDoListSave3.txt");
+            }
+            LoadToDoListFromFile("ToDoListSave1.txt");
             UpdateUI();
+
         }
 
         //handle what happens when the form closes
         private void Form1_FormClosing(object sender, EventArgs e)
         {
-            SaveToDoListToFile("ToDoListSave.txt");
+            SaveToDoListToFile("ToDoListSave" + saveFile + ".txt");
         }
 
         //save the to do list when the save button is pressed
-        private void SaveButton_Click(object sender, EventArgs e)
+        private void SaveFileButton_Click(object sender, EventArgs e)
         {
-            SaveToDoListToFile("ToDoListSave.txt");
+            SaveToDoListToFile("ToDoListSave" + saveFile + ".txt");
+            MessageBox.Show("File " + saveFile + " saved.");
         }
+
+        //Load different saves
+        private void LoadFile1_Click(object sender, EventArgs e)
+        {
+            if (saveFile == 1)
+            {
+                MessageBox.Show("Already in file 1");
+            }
+            else
+            {
+                SaveToDoListToFile("ToDoListSave" + saveFile + ".txt");
+                ToDoList.Items.Clear();
+                saveFile = 1;
+                LoadToDoListFromFile("ToDoListSave1.txt");
+                UpdateUI();
+            }
+
+        }
+        private void LoadFile2_Click(object sender, EventArgs e)
+        {
+            if (saveFile == 2)
+            {
+                MessageBox.Show("Already in file 2");
+            }
+            else
+            {
+                SaveToDoListToFile("ToDoListSave" + saveFile + ".txt");
+                ToDoList.Items.Clear();
+                saveFile = 2;
+                LoadToDoListFromFile("ToDoListSave2.txt");
+                UpdateUI();
+            }
+        }
+        private void LoadFile3_Click(object sender, EventArgs e)
+        {
+            if (saveFile == 3)
+            {
+                MessageBox.Show("Already in file 3");
+            }
+            else
+            {
+                SaveToDoListToFile("ToDoListSave" + saveFile + ".txt");
+                ToDoList.Items.Clear();
+                saveFile = 3;
+                LoadToDoListFromFile("ToDoListSave3.txt");
+                UpdateUI();
+            }
+        }
+
+        
     }
 }
