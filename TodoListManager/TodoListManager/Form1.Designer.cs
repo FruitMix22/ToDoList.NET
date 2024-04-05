@@ -43,6 +43,8 @@
             panel2 = new Panel();
             EnterTaskText = new Label();
             deleteLastSelected = new Button();
+            ClearListButton = new Button();
+            RevertChangesButton = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)SaveFileButton).BeginInit();
             SuspendLayout();
@@ -196,12 +198,36 @@
             deleteLastSelected.UseVisualStyleBackColor = false;
             deleteLastSelected.Click += DeleteLastSelected_Click;
             // 
+            // ClearListButton
+            // 
+            ClearListButton.BackColor = Color.Red;
+            ClearListButton.Location = new Point(343, 379);
+            ClearListButton.Name = "ClearListButton";
+            ClearListButton.Size = new Size(75, 23);
+            ClearListButton.TabIndex = 10;
+            ClearListButton.Text = "Delete All";
+            ClearListButton.UseVisualStyleBackColor = false;
+            ClearListButton.Click += ClearListButton_Click;
+            // 
+            // RevertChangesButton
+            // 
+            RevertChangesButton.BackColor = Color.Lime;
+            RevertChangesButton.Location = new Point(329, 283);
+            RevertChangesButton.Name = "RevertChangesButton";
+            RevertChangesButton.Size = new Size(97, 23);
+            RevertChangesButton.TabIndex = 11;
+            RevertChangesButton.Text = "Revert Changes";
+            RevertChangesButton.UseVisualStyleBackColor = false;
+            RevertChangesButton.Click += RevertChangesButton_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(255, 255, 192);
             ClientSize = new Size(912, 527);
+            Controls.Add(RevertChangesButton);
+            Controls.Add(ClearListButton);
             Controls.Add(deleteLastSelected);
             Controls.Add(EnterTaskText);
             Controls.Add(panel1);
@@ -247,5 +273,7 @@
         private Button LoadFile2;
         private Label saveFileCurrentText;
         private PictureBox SaveFileButton;
+        private Button ClearListButton;
+        private Button RevertChangesButton;
     }
 }

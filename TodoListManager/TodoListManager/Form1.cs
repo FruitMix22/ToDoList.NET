@@ -1,3 +1,4 @@
+//30/07/20
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 
@@ -243,6 +244,17 @@ namespace TodoListManager
             }
         }
 
-        
+        private void ClearListButton_Click(object sender, EventArgs e)
+        {
+            ToDoList.Items.Clear();
+            UpdateUI();
+        }
+
+        private void RevertChangesButton_Click(object sender, EventArgs e)
+        {
+            ToDoList.Items.Clear();
+            LoadToDoListFromFile("ToDoListSave" + saveFile + ".txt");
+            UpdateUI();
+        }
     }
 }
