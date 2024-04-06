@@ -35,6 +35,7 @@
             tasksAmountText = new Label();
             tasksCompletedText = new Label();
             panel1 = new Panel();
+            ProgressBarTasks = new ProgressBar();
             SaveFileButton = new PictureBox();
             saveFileCurrentText = new Label();
             LoadFile3 = new Button();
@@ -45,6 +46,8 @@
             deleteLastSelected = new Button();
             ClearListButton = new Button();
             RevertChangesButton = new Button();
+            DescriptionTextBox = new TextBox();
+            DescriptionLabel = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)SaveFileButton).BeginInit();
             SuspendLayout();
@@ -104,6 +107,7 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(255, 255, 128);
+            panel1.Controls.Add(ProgressBarTasks);
             panel1.Controls.Add(SaveFileButton);
             panel1.Controls.Add(saveFileCurrentText);
             panel1.Controls.Add(LoadFile3);
@@ -113,6 +117,13 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(914, 50);
             panel1.TabIndex = 6;
+            // 
+            // ProgressBarTasks
+            // 
+            ProgressBarTasks.Location = new Point(200, 16);
+            ProgressBarTasks.Name = "ProgressBarTasks";
+            ProgressBarTasks.Size = new Size(100, 23);
+            ProgressBarTasks.TabIndex = 12;
             // 
             // SaveFileButton
             // 
@@ -220,12 +231,35 @@
             RevertChangesButton.UseVisualStyleBackColor = false;
             RevertChangesButton.Click += RevertChangesButton_Click;
             // 
+            // DescriptionTextBox
+            // 
+            DescriptionTextBox.Location = new Point(497, 194);
+            DescriptionTextBox.Multiline = true;
+            DescriptionTextBox.Name = "DescriptionTextBox";
+            DescriptionTextBox.Size = new Size(311, 208);
+            DescriptionTextBox.TabIndex = 12;
+            DescriptionTextBox.Visible = false;
+            DescriptionTextBox.TextChanged += DescriptionTextBox_TextChanged;
+            // 
+            // DescriptionLabel
+            // 
+            DescriptionLabel.AutoSize = true;
+            DescriptionLabel.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            DescriptionLabel.Location = new Point(499, 173);
+            DescriptionLabel.Name = "DescriptionLabel";
+            DescriptionLabel.Size = new Size(79, 17);
+            DescriptionLabel.TabIndex = 13;
+            DescriptionLabel.Text = "Description:";
+            DescriptionLabel.Visible = false;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(255, 255, 192);
             ClientSize = new Size(912, 527);
+            Controls.Add(DescriptionLabel);
+            Controls.Add(DescriptionTextBox);
             Controls.Add(RevertChangesButton);
             Controls.Add(ClearListButton);
             Controls.Add(deleteLastSelected);
@@ -275,5 +309,8 @@
         private PictureBox SaveFileButton;
         private Button ClearListButton;
         private Button RevertChangesButton;
+        private ProgressBar ProgressBarTasks;
+        private TextBox DescriptionTextBox;
+        private Label DescriptionLabel;
     }
 }

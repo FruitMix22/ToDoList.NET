@@ -1,4 +1,5 @@
-//30/07/20
+//30/07/19<3
+using System.Numerics;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 
@@ -16,6 +17,9 @@ namespace TodoListManager
         //Current save file number
         private int saveFile = 1;
 
+        //Description box array
+        private string[] descriptionIndex = {"","","","","","","","","","",""};
+
         public Form1()
         {
             InitializeComponent();
@@ -29,6 +33,7 @@ namespace TodoListManager
             CheckForTotalTasks();
             CheckForTasksCompleted();
             SaveFileCurrentText();
+            UpdateProgressBar();
         }
 
         //Text updater to show what file youre currently in
@@ -51,6 +56,19 @@ namespace TodoListManager
             tasksCompletedText.Text = "Amount of tasks completed: " + completedTasks;
         }
 
+        //Update progress bar at the top
+        private void UpdateProgressBar()
+        {
+            ProgressBarTasks.Maximum = ToDoList.Items.Count;
+            ProgressBarTasks.Value = ToDoList.CheckedItems.Count;
+        }
+
+        //link the to do list index to the description index
+        private void DescriptionLink()
+        {
+            DescriptionTextBox.Text = descriptionIndex[lastSelected];
+        }
+
         //Save to a file
         private void SaveToDoListToFile(string fileName)
         {
@@ -61,11 +79,18 @@ namespace TodoListManager
                     taskIndex++;
                     if (ToDoList.GetItemChecked(taskIndex))
                     {
-                        writer.WriteLine(item.ToString() + "1");
+                        writer.WriteLine(item.ToString() + " T1");
                     }
                     else
                     {
-                        writer.WriteLine(item.ToString() + "0");
+                        writer.WriteLine(item.ToString() + " T0");
+                    }
+                }
+                for ( int i = 0; i < descriptionIndex.Length; i++ )
+                {
+                    if(descriptionIndex[i] != "")
+                    {
+                        writer.WriteLine(descriptionIndex[i] + "D");
                     }
                 }
                 taskIndex = -1;
@@ -77,20 +102,28 @@ namespace TodoListManager
         {
             if (File.Exists(fileName))
             {
+                int descriptionLine = -1;
                 using (StreamReader reader = new StreamReader(fileName))
                 {
                     string line;
                     while ((line = reader.ReadLine()) != null)
                     {
-                        if (line.EndsWith("1"))
+                        if (line.EndsWith("1") && line[line.Length - 2] == 'T')
                         {
-                            line = line.Remove(line.Length - 1);
+                            line = line.Remove(line.Length - 3);
                             ToDoList.Items.Add(line, true);
                         }
-                        else if (line.EndsWith("0"))
+                        else if (line.EndsWith("0") && line[line.Length - 2] == 'T')
                         {
-                            line = line.Remove(line.Length - 1);
+                            line = line.Remove(line.Length - 3);
                             ToDoList.Items.Add(line);
+                        }
+
+                        if(line.EndsWith("D"))
+                        {
+                            descriptionLine++;
+                            line = line.Remove(line.Length - 1);
+                            descriptionIndex[descriptionLine] = line;
                         }
                     }
                 }
@@ -143,10 +176,15 @@ namespace TodoListManager
         //check what was last selected in the to do list
         private void ToDoList_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //Make descriptions visible when loading to do list options
+            DescriptionLabel.Visible = true;
+            DescriptionTextBox.Visible = true;
             if (ToDoList.SelectedIndex != -1)
             {
                 lastSelected = ToDoList.SelectedIndex;
             }
+
+            DescriptionLink();
             ToDoList.ClearSelected();
             UpdateUI();
         }
@@ -157,6 +195,7 @@ namespace TodoListManager
             if (lastSelected != -1)
             {
                 ToDoList.Items.RemoveAt(lastSelected);
+                descriptionIndex[lastSelected] = "";
                 lastSelected = -1;
             }
             UpdateUI();
@@ -196,6 +235,32 @@ namespace TodoListManager
             MessageBox.Show("File " + saveFile + " saved.");
         }
 
+        //Clear list button click
+        private void ClearListButton_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < descriptionIndex.Length; i++)
+            {
+                descriptionIndex[i] = "";
+            }
+            ToDoList.Items.Clear();
+            UpdateUI();
+
+        }
+
+        //Revert changes to previous save
+        private void RevertChangesButton_Click(object sender, EventArgs e)
+        {
+            ToDoList.Items.Clear();
+            LoadToDoListFromFile("ToDoListSave" + saveFile + ".txt");
+            UpdateUI();
+        }
+
+        //Save text thats entered into description box to index of what was last selected
+        private void DescriptionTextBox_TextChanged(object sender, EventArgs e)
+        {
+            descriptionIndex[lastSelected] = DescriptionTextBox.Text;
+        }
+       
         //Load different saves
         private void LoadFile1_Click(object sender, EventArgs e)
         {
@@ -208,8 +273,14 @@ namespace TodoListManager
                 SaveToDoListToFile("ToDoListSave" + saveFile + ".txt");
                 ToDoList.Items.Clear();
                 saveFile = 1;
+                for (int i = 0; i < descriptionIndex.Length; i++)
+                {
+                    descriptionIndex[i] = "";
+                }
                 LoadToDoListFromFile("ToDoListSave1.txt");
                 UpdateUI();
+                DescriptionTextBox.Visible = false;
+                DescriptionLabel.Visible = false;
             }
 
         }
@@ -224,8 +295,14 @@ namespace TodoListManager
                 SaveToDoListToFile("ToDoListSave" + saveFile + ".txt");
                 ToDoList.Items.Clear();
                 saveFile = 2;
+                for (int i = 0; i < descriptionIndex.Length; i++)
+                {
+                    descriptionIndex[i] = "";
+                }
                 LoadToDoListFromFile("ToDoListSave2.txt");
                 UpdateUI();
+                DescriptionTextBox.Visible = false;
+                DescriptionLabel.Visible = false;
             }
         }
         private void LoadFile3_Click(object sender, EventArgs e)
@@ -239,22 +316,16 @@ namespace TodoListManager
                 SaveToDoListToFile("ToDoListSave" + saveFile + ".txt");
                 ToDoList.Items.Clear();
                 saveFile = 3;
+                for(int i = 0; i < descriptionIndex.Length; i++) 
+                {
+                    descriptionIndex[i] = "";
+                }
                 LoadToDoListFromFile("ToDoListSave3.txt");
                 UpdateUI();
+                DescriptionTextBox.Visible = false;
+                DescriptionLabel.Visible = false;
             }
         }
 
-        private void ClearListButton_Click(object sender, EventArgs e)
-        {
-            ToDoList.Items.Clear();
-            UpdateUI();
-        }
-
-        private void RevertChangesButton_Click(object sender, EventArgs e)
-        {
-            ToDoList.Items.Clear();
-            LoadToDoListFromFile("ToDoListSave" + saveFile + ".txt");
-            UpdateUI();
-        }
     }
 }
