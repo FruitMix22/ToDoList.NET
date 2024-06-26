@@ -71,11 +71,12 @@ namespace ToDoList._2
 
                 for (int i = 0; i < ToDoList.Items.Count; i++)
                 {
+                    string isChecked = ToDoList.GetItemChecked(i) ? "1" : "0";
 
                     using (StreamWriter writer = new StreamWriter(filePath, append : true))
                     {
                         // Write data
-                        writer.WriteLine(ToDoList.Items[i]);
+                        writer.WriteLine($"{ToDoList.Items[i]},{isChecked}");
                     }
                 }
             }
@@ -101,14 +102,32 @@ namespace ToDoList._2
                     using (StreamReader writer = new StreamReader(filePath))
                     {
                         while (!writer.EndOfStream)
-                         {
-                             string line = writer.ReadLine();
-                             ToDoList.Items.Add(line);
-                         }
+                        {
+                            string line = writer.ReadLine();
+                            var parts = line.Split(',');
+                            
+                        if (parts.Length == 2)
+                        {
+                            throw new InvalidDataException("Data corrupted, not enough CSV values");
+                        }
+                            //If the value after the comma (part 2) is 1, then imnport the value as checked
+                            //If not, then just import the value as not checkesd
+                            if (parts[1] == "1")
+                            {
+                                ToDoList.Items.Add(parts[0], true);
+                            
+                            }
+                            else
+                            {
+                                ToDoList.Items.Add(parts[0], false); 
+                            }
+
+                        }
                     }
             }
             catch (FileNotFoundException ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             catch (ArgumentNullException ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Information); }
+            catch (InvalidDataException ex) {  MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.)}
             catch (Exception ex) { throw new Exception("Error while loading data to List: " + ex.Message, ex); }
         }
 
